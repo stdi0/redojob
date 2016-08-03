@@ -1,0 +1,39 @@
+{% load staticfiles %}
+<html>
+<head>
+<title>Главная</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css"> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script> 
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+<div class="main">
+<div class="page-header">
+<table border="0">
+<tr>
+<td>
+<img src="{% static 'image/logo.png' %}">
+</td>
+<td width="100%">
+<div class="menu">
+<a href="{% url 'core:index' %}">Вакансии</a>
+<a href="{% url 'core:add' %}">Добавить вакансию</a>
+{% if user.is_authenticated %}
+Привет, {{ user.username }} <a href="{% url 'core:profile' %}">(профиль)</a><a href="{% url 'core:logout' %}">Выход</a>
+{% else %}
+<a href="{% url 'core:login' %}">Вход/Регистрация</a>
+{% endif %}
+</div>
+</td>
+</tr>
+</table>
+</div>
+
+<div>
+{% block content %}
+{% endblock %}
+</div>
+</div>
+</body>
+</html>

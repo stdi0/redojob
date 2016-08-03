@@ -1,0 +1,75 @@
+{% extends 'core/base.html' %}
+{% load thumbnail %}
+{% block content %}
+<form action="" method="post">
+	{% csrf_token %}
+    <div class="search">
+    <label for="{{ search_form.name.id_for_label }}">Поиск вакансии:</label>
+    {{ search_form.text }}
+    <input type="submit" value="Найти">
+    </div>
+</form>
+{% if flag %}
+{% if result %}
+{% for job in result %}
+<table border="0">
+<tr>
+<td>
+<div style="width: 190px;">
+{% thumbnail job.avatar "150x100" as im %}
+    <p align="center"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></p>
+{% endthumbnail %}
+</div>
+</td>
+<td>
+<div class="job">
+<p><a href="{% url 'core:detail' job.id %}">{{ job.name }}</a></p>
+<!--<img src="{{ MEDIA_URL }}{{ job.avatar }}">-->
+<p>{{  job.employer }}</p>
+<p>{{ job.salary }} руб.</p>
+<div class="date">
+<p>{{ job.created_date }}</p>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<hr>
+{% endfor %}
+{% else %}
+<p>Вакансий не найдено. Попробуйте изменить запрос.</p>
+{% endif %}
+{% else %}
+
+{% if latest_jobs_list %}
+{% for job in latest_jobs_list %}
+<table border="0">
+<tr>
+<td>
+<div style="width: 190px;">
+{% thumbnail job.avatar "150x100" as im %}
+    <p align="center"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></p>
+{% endthumbnail %}
+</div>
+</td>
+<td>
+<div class="job">
+<p><a href="{% url 'core:detail' job.id %}">{{ job.name }}</a></p>
+<!--<img src="{{ MEDIA_URL }}{{ job.avatar }}">-->
+<p>{{  job.employer }}</p>
+<p>{{ job.salary }} руб.</p>
+<div class="date">
+<p>{{ job.created_date }}</p>
+</div>
+</div>
+</td>
+</tr>
+</table>
+<hr>
+{% endfor %}
+{% else %}
+<p>No jobs are available</p>
+{% endif %}
+{% endif %}
+{% endblock content %}
+

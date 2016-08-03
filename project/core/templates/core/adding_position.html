@@ -1,0 +1,46 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<form action="" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div class="formWrapper">
+    <div class="fieldWrapper">
+    <label for="{{ form.name.id_for_label }}">Должность:</label>
+    {{ form.name }}
+    {{ form.name.errors }}
+    </div>
+    <div class="clear"></div>
+    <div class="fieldWrapper">
+    <label for="{{ form.employer.id_for_label }}">Компания:</label>
+    {{ form.employer }}
+    {{ form.employer.errors }}
+    </div>
+    <div class="clear"></div>
+    <div class="fieldWrapper">
+    <label for="{{ form.salary.id_for_label }}">Зарплата:</label>
+    {{ form.salary }}
+    {{ form.salary.errors }}
+    </div>
+    <div class="clear"></div>
+    <div class="fieldWrapper">
+    <label for="{{ form.text.id_for_label }}">Описание:</label>
+    {{ form.text }}
+    {{ form.text.errors }}
+    </div>
+    <div class="clear"></div>
+    <div class="fieldWrapper">
+    <label for="{{ form.phone.id_for_label }}">Телефон:</label>
+    {{ form.phone }}
+    {{ form.phone.errors }}
+    </div>
+    <div class="clear"></div>
+    <div class="fieldWrapper">
+    <label for="{{ form.image.id_for_label }}">Картинка:</label>
+    {{ form.image }}
+    {{ form.image.errors }}
+    </div>
+    <div class="clear"></div>
+    <input style="float: right;" type="submit" value="Отправить" />
+    </div>
+</form>
+{% endblock content %}

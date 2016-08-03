@@ -1,0 +1,35 @@
+{% extends 'core/base.html' %}
+{% load thumbnail %}
+{% block content %}
+<h1>Мои вакансии</h1>
+{% if profile_jobs_list %}
+{% for job in profile_jobs_list %}
+<table border="0">
+<tr>
+<td>
+<div style="width: 190px;">
+{% thumbnail job.avatar "150x100" as im %}
+    <p align="center"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></p>
+{% endthumbnail %}
+</div>
+</td>
+<td>
+<div class="job">
+<p><a href="{% url 'core:detail' job.id %}">{{ job.name }}</a></p>
+<!--<img src="{{ MEDIA_URL }}{{ job.avatar }}">-->
+<p>{{  job.employer }}</p>
+<p>{{ job.salary }} руб.</p>
+<div class="date">
+<p>{{ job.created_date }}</p>
+<p><a href="{% url 'core:delete' job.id %}">Удалить вакансию</a></p>
+</div>
+</div>
+</td>
+</tr>
+</table> 
+<hr>
+{% endfor %}
+{% else %}
+<p>No jobs are available</p>
+{% endif %}
+{% endblock content %}

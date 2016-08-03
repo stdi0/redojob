@@ -1,0 +1,21 @@
+{% extends 'core/base.html' %}
+{% load thumbnail %}
+{% block content %}
+<table border="0">
+<tr>
+<td style="width: 190px;">
+{% thumbnail job.avatar "150x100" as im %}
+    <p align="center"><img src="{{ im.url }}" width="{{ im.width }}" height="{{ im.height }}"></p>
+{% endthumbnail %}
+</td>
+<td>
+<h1>{{ job.name }}</h1>
+<p>{{ job.employer }}</p>
+<p>{{ job.salary }}</p>
+<p>{{ job.text|linebreaksbr }}</p>
+<p>{{ job.created_date }}</p>
+Контактный телефон: <p>{{ job.phone }}</p>
+</td>
+</tr>
+</table>
+{% endblock content %}

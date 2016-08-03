@@ -1,0 +1,24 @@
+{% extends 'core/base.html' %}
+{% block content %}
+<div style="width: 400px; margin: 0 auto;">
+<h1>Войдите</h1>
+<form action="" method="post">
+{% csrf_token %}
+    <div class="fieldWrapper">
+    <label for="{{ form.name.id_for_label }}">Логин:</label>
+    {{ form.username }}
+    {{ form.username.errors }}
+    </div>
+    <div class="clear"></div>
+    <div class="fieldWrapper">
+    <label for="{{ form.name.id_for_label }}">Пароль:</label>
+    {{ form.password }}
+    {{ form.password.errors }}
+    </div>
+    <div class="clear"></div>
+    <input type="submit" value="login" />
+    <input type="hidden" name="next" value="http:// 127.0.0.1:8000/core" />
+</form>
+<h1>Или <a href="{% url 'core:register' %}">зарегистрируйтесь.</a></h1>
+</div>
+{% endblock content %}
